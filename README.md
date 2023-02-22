@@ -1,3 +1,6 @@
+## LitterAlly
+# Make litter your ally!
+
 ```
           _____                    _____                _____          
          /\    \                  /\    \              /\    \         
