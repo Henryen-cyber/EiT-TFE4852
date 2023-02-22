@@ -1,15 +1,10 @@
-#include "arduino_secrets.h"
+// #include "arduino_secrets.h"
 #include <MKRWAN.h>
-#include "NewPing.h";
-#include <DHT.h>
+#include "NewPing.h"
 
 #define trigPin 7
 #define echoPin 8
 #define maxDistance 400
-#define DHTPIN 13
-#define DHTTYPE DHT11
-
-DHT dht(DHTPIN, DHTTYPE);
 
 NewPing sonar(trigPin, echoPin, maxDistance);
 
@@ -28,8 +23,8 @@ int ledred = 11;
 
 LoRaModem modem;
 
-String appEui = SECRET_APP_EUI_2;
-String appKey = SECRET_APP_KEY_2;
+String appEui = "12345678";
+String appKey = "12345678";
 
 
 void setup() {
@@ -48,7 +43,6 @@ void setup() {
   //digitalWrite(ledgreen, HIGH);
   digitalWrite(ledred, HIGH);
   
-  dht.begin();
   pinMode(trigPin, OUTPUT);
   pinMode(echoPin, INPUT);
 
@@ -80,22 +74,9 @@ void loop() {
 int z= 0;
 
   for (int i=0; i<120; i++) {
-    Serial.print("Counter =");
-    z=z+1;
-    Serial.println(z);
-    // Read sensor values and multiply by 100 to effictively have 2 decimals
-     uint16_t humidity = dht.readHumidity(false) * 100;
-    // uint8_t humidity = dht.readHumidity(false) * 10;
 
-    // false: Celsius (default)
-    // true: Farenheit
-     uint16_t temperature = dht.readTemperature(false) * 100;
-    // uint8_t temperature = dht.readTemperature(false) * 10;
-
-    hum = dht.readHumidity();
-    temp = dht.readTemperature();
-
-    soundsp = 331.4 + (0.606 * temp) + (0.0124 * hum);
+    // soundsp = 331.4 + (0.606 * temp) + (0.0124 * hum); -- We dont have temp/hum sensor, just use c=343.4 m/s
+    soundsp = 343.4;
 
     soundcm = soundsp / 10000;
 
@@ -104,13 +85,6 @@ int z= 0;
 
      uint16_t dist = ((duration / 2) * soundcm) * 100;
     // uint8_t dist = ((duration / 2) * soundcm) * 100;
-
-    Serial.print("Temperature");
-    Serial.print(temp);
-    Serial.print(",");
-    Serial.print("Humidity");
-    Serial.print(hum);
-    Serial.print(",");
     
     Serial.print("Water Level = ");
     if (distance >= 400 || distance <= 2) {
