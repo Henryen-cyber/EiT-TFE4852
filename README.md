@@ -1,7 +1,8 @@
 # LitterAlly
+
 **Make litter your ally!**
 
-```
+```[]
           _____                    _____                _____          
          /\    \                  /\    \              /\    \         
         /::\    \                /::\    \            /::\    \        
@@ -25,4 +26,5 @@
          \/____/                  \/____/                              
                                                                        
 ```
-**Detta blir gøy**
+
+## Detta blir gøy
